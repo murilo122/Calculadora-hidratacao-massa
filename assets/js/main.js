@@ -4,20 +4,21 @@ form.addEventListener('submit', function(evento){
 	const resultado = document.getElementById('result')
 	const QuantidadePizza = document.getElementById('QuantidadePizzas')
 	const QuantidadeHidratacao = document.getElementById('QuantidadeHidrataçao')
-	const sal = 6
+	const qtdPizza = QuantidadePizza.value;
+	const sal = 6 
 	const acucar = 5
 	const oleo = 2
 	const farinha = 250
 	const fermento = 5 
-
+	const farinhaMax =  farinha * qtdPizza
+	
 	function ObterQuantidadeAgua (){
-		const farinhaMax =  farinha * QuantidadePizza.value
 		const porcentagemHidratacao = farinhaMax * (QuantidadeHidratacao.value / 100)
 		return porcentagemHidratacao
 	}
 
   const paragrafoFarinha = document.createElement('p')
-	paragrafoFarinha.textContent =  `Farinha: ${farinha * QuantidadePizza.value}g`
+	paragrafoFarinha.textContent =  `Farinha: ${farinhaMax}g`
 	resultado.append(paragrafoFarinha)
 
 	const paragrafoAgua = document.createElement('p')
@@ -25,24 +26,27 @@ form.addEventListener('submit', function(evento){
 	resultado.append(paragrafoAgua)
 
 	const paragrafoSal = document.createElement('p')
-	paragrafoSal.textContent =  `Sal: ${sal * QuantidadePizza.value}g`
+	paragrafoSal.textContent =  `Sal: ${sal * qtdPizza}g`
 	resultado.append(paragrafoSal)
 
 	const paragrafoAcucar = document.createElement('p')
-	paragrafoAcucar.textContent =  `Açúcar: ${acucar * QuantidadePizza.value}g`
+	paragrafoAcucar.textContent =  `Açúcar: ${acucar * qtdPizza}g`
 	resultado.append(paragrafoAcucar)
 
 	const paragrafoFermento = document.createElement('p')
-	paragrafoFermento.textContent =  `Fermento: ${fermento * QuantidadePizza.value}g`
+	paragrafoFermento.textContent =  `Fermento: ${fermento * qtdPizza}g`
 	resultado.append(paragrafoFermento)
 
 	const paragrafoOleo = document.createElement('p')
-	paragrafoOleo.textContent =  `Óleo: ${oleo * QuantidadePizza.value}ml`
+	paragrafoOleo.textContent =  `Óleo: ${oleo * qtdPizza}ml`
 	resultado.append(paragrafoOleo)
 
 
 
 });
+
+
+
 
 
 
