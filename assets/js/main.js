@@ -4,47 +4,32 @@ form.addEventListener('submit', function(evento){
 	const resultado = document.getElementById('result')
 	const QuantidadePizza = document.getElementById('QuantidadePizzas')
 	const QuantidadeHidratacao = document.getElementById('QuantidadeHidrataçao')
-	const qtdPizza = QuantidadePizza.value;
-	const sal = 6 
-	const acucar = 5
-	const oleo = 2
-	const farinha = 250
-	const fermento = 5 
-	const farinhaMax =  farinha * qtdPizza
+	const qtdPizza = parseInt(QuantidadePizza.value);
+	const ingredientes = {
+ 		sal : {nome: "Sal", valor: 6},
+ 		acucar : {nome : "Açúcar", valor: 5},
+ 		oleo : {nome : "Óleo", valor: 2},
+ 		farinha : {nome : "Farinha", valor: 250},
+ 		fermento : {nome : "Fermento", valor: 5},
+		agua: {nome : "Água", valor : null},
+	};
+	const farinhaMax =  ingredientes.farinha.valor * qtdPizza
+	ingredientes.agua.valor = parseInt(farinhaMax * (QuantidadeHidratacao.value / 100))
+	resultado.innerHTML = ""
+
+   
+  for (const ingrediente of Object.values(ingredientes)) {
+    const paragrafo = document.createElement('p');
+    const unidade = (ingrediente.nome === "Água" || ingrediente.nome === "Óleo") ? "ml" : "g";
 	
-	function ObterQuantidadeAgua (){
-		const porcentagemHidratacao = farinhaMax * (QuantidadeHidratacao.value / 100)
-		return porcentagemHidratacao
-	}
+    const quantidade = (ingrediente.nome === "Farinha") ? farinhaMax : (ingrediente.nome === "Água" ? ingrediente.valor : ingrediente.valor * qtdPizza);
 
-  const paragrafoFarinha = document.createElement('p')
-	paragrafoFarinha.textContent =  `Farinha: ${farinhaMax}g`
-	resultado.append(paragrafoFarinha)
-
-	const paragrafoAgua = document.createElement('p')
-	paragrafoAgua.textContent =  `Água: ${ObterQuantidadeAgua()}ml`
-	resultado.append(paragrafoAgua)
-
-	const paragrafoSal = document.createElement('p')
-	paragrafoSal.textContent =  `Sal: ${sal * qtdPizza}g`
-	resultado.append(paragrafoSal)
-
-	const paragrafoAcucar = document.createElement('p')
-	paragrafoAcucar.textContent =  `Açúcar: ${acucar * qtdPizza}g`
-	resultado.append(paragrafoAcucar)
-
-	const paragrafoFermento = document.createElement('p')
-	paragrafoFermento.textContent =  `Fermento: ${fermento * qtdPizza}g`
-	resultado.append(paragrafoFermento)
-
-	const paragrafoOleo = document.createElement('p')
-	paragrafoOleo.textContent =  `Óleo: ${oleo * qtdPizza}ml`
-	resultado.append(paragrafoOleo)
-
+    paragrafo.textContent = `${ingrediente.nome}: ${quantidade}${unidade}`;
+    resultado.append(paragrafo);
+  }
 
 
 });
-
 
 
 
